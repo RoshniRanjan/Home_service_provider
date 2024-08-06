@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Provider Sign Up Form</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+
+  <style>
+    .signup-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container my-4 signup-container">
+    <div class="row">
+      <div class="col-md-4 col-lg-4 col-sm-12">
+        <img src="signup_seeker.jpg" alt="Signup Image" class="img-fluid">
+      </div>
+      <div class="col-md-8 col-lg-8 col-sm-12" id="abc">
+        <h2>Provider Registeration</h2>
+        <form id="signupForm" class="needs-validation" action="/provider_signup" method="POST">
+          <div class="form-group">
+            <label for="fullName">Business Name:</label>
+            <input type="text" class="form-control" id="fullName" name="fullName" required>
+          </div>
+          <div class="form-group">
+            <label for="phoneNumber">Phone Number:</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="countryCode">+91</span>
+              </div>
+
+              <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" pattern="[0-9]{10}"
+                maxlength="10" placeholder="Enter 10-digit phone number" required>
+                </div>
+              <small id="phoneHelp" class="form-text text-muted">Please enter a valid 10-digit phone number.</small>
+            
+            </div>
+            <div class="form-group">
+              <label for="Address">Address:</label>
+              <textarea class="form-control" id="Address" name="Address" rows="3" placeholder="Enter your address here"
+                required></textarea>
+            </div>
+            <div class="form-group">
+              <label for="profileImage">Profile Image (JPG, JPEG, PNG):</label>
+              <input type="file" class="form-control-file" id="profileImage" name="profileImage"
+                accept=".jpg, .jpeg, .png" required>
+              <small id="imageHelp" class="form-text text-muted">Please upload a JPG, JPEG, or PNG image.</small>
+            </div>
+
+            <div class="form-group" id="services" name:"services">
+              <label>Services Provided:</label>
+              <div class="row">
+                <div class="col-lg-3">
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="option1" name="options" value="Plumber">
+                    <label class="form-check-label" for="option1">Plumber</label>
+                  </div>
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="option2" name="options" value="Carpenter">
+                    <label class="form-check-label" for="option2">Carpenter</label>
+                  </div>
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="option3" name="options" value="Technician">
+                    <label class="form-check-label" for="option3">Technician</label>
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="option4" name="options"
+                      value="Gardening Services">
+                    <label class="form-check-label" for="option4">Gardener</label>
+                  </div>
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="option5" name="options" value="Painter">
+                    <label class="form-check-label" for="option5">Painter</label>
+                  </div>
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="option6" name="options" value="Pest Control">
+                    <label class="form-check-label" for="option6">Pest-control</label>
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="option7" name="options" value="Movers-Packers">
+                    <label class="form-check-label" for="option7">Movers-Packers</label>
+                  </div>
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="option8" name="options" value="Glass Repair">
+                    <label class="form-check-label" for="option8">Glass Repair</label>
+                  </div>
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="option9" name="options" value="Beauty services">
+                    <label class="form-check-label" for="option9">Beauty Services</label>
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="option10" name="options" value="Electrician">
+                    <label class="form-check-label" for="option10">Electrician</label>
+                  </div>
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="option11" name="options"
+                      value="Appliance repair">
+                    <label class="form-check-label" for="option11">Appliance-Repair</label>
+                  </div>
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="option12" name="options" value="Laundry">
+                    <label class="form-check-label" for="option12">Laundry</label>
+                  </div>
+                </div>
+
+              </div>
+
+
+
+
+              <div class="invalid-feedback d-block">Please select at least one service.</div>
+            </div>
+
+
+            <div class="form-group">
+              <label for="password">Password:</label>
+              <input type="password" class="form-control" id="password" name="password" required>
+              <small id="passwordcheck"></small>
+            </div>
+            <div class="form-group">
+              <label for="confirmPassword">Confirm Password:</label>
+              <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+              <small id="passwordHelp"></small>
+            </div>
+            <div class="form-group">
+              <label for="city">City:</label>
+              <select class="form-control" id="city" name="city" required>
+                <option value="" disabled selected id="defaultCity">Select your city</option>
+                <option value="patiala">Patiala</option>
+                <option value="ludhiana">Ludhiana</option>
+                <option value="chandigarh">Chandigarh</option>
+                <!-- Add more city options as needed -->
+              </select>
+            </div>
+           <div class="form-group">
+            <label for="preferredTimings">Preferred Timings:</label>
+            <input type="text" class="form-control" id="preferredTiming" name="preferredTiming"
+              placeholder="e.g., 9am-6pm" required>
+          </div>
+            <div class="form-group form-check">
+              <input type="checkbox" class="form-check-input" id="agreeTerms" required>
+              <label class="form-check-label" for="agreeTerms">I agree to the terms and conditions</label>
+            </div>
+            <button type="submit" class="btn btn-primary" id="signupButton" onclick="validate()">Sign Up</button>
+            <button type="button" class="btn btn-secondary" onclick="resetForm()">Reset</button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</body>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+
+
+  var form = document.getElementById("signupForm");
+  var signupButton = document.getElementById("signupButton");
+  var a = false;
+  var b = false;
+  var c = false;
+
+  signupButton.disabled = true;
+  function resetForm() {
+    document.getElementById("signupForm").reset();
+    document.getElementById("defaultCity").selected = true;
+  }
+
+
+  function resetForm() {
+    document.getElementById("signupForm").reset();
+    document.getElementById("defaultCity").selected = true;
+  }
+  function validateServices() {
+    // Check if at least one checkbox is selected
+    checkboxes = document.querySelectorAll('input[name="options"]:checked');
+    var servicesFeedback = document.querySelector('.form-group#services .invalid-feedback');
+
+    if (checkboxes.length === 0) {
+      // Show invalid feedback for services
+      servicesFeedback.innerHTML = 'Please select at least one service.';
+      a = false;
+
+
+    } else {
+      // Hide invalid feedback for services
+      servicesFeedback.innerHTML = '';
+      a = true;
+
+
+    }
+    updateSignupButtonState()
+  }
+
+  // Attach the validateServices function to the change event of checkboxes
+  var serviceCheckboxes = document.querySelectorAll('input[name="options"]');
+  serviceCheckboxes.forEach(function (checkbox) {
+    checkbox.addEventListener('change', validateServices);
+  });
+
+
+
+
+
+  function getCheckedCheckboxes(checkboxGroupName) {
+    const checkboxes = document.getElementsByName(checkboxGroupName);
+    const checkedValues = [];
+
+    checkboxes.forEach((checkbox) => {
+      if (checkbox.checked) {
+        checkedValues.push(checkbox.value);
+      }
+    });
+
+    return checkedValues;
+  }
+
+
+  // Password match check
+
+  document.getElementById("confirmPassword").addEventListener("input", checkPasswordMatch);
+
+  document.getElementById("password").addEventListener("input", validatePassword);
+
+  function validatePassword() {
+    let password = document.getElementById("password").value;
+    var Message = document.getElementById("passwordcheck");
+    var specialSymbolRegex = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/;
+    var uppercaseRegex = /[A-Z]/;
+    var lowercaseRegex = /[a-z]/;
+    var digitRegex = /\d/;
+    if (password.length < 8 || password.length > 15) {
+      Message.innerHTML = "Password length must be between 8-15 characters";
+      Message.style.color = "red";
+      b = false;
+    }
+
+    else if (!specialSymbolRegex.test(password)) {
+      Message.innerHTML = "Password must contain atleast one special character";
+      Message.style.color = "red";
+      b = false;
+
+    }
+
+
+    else if (!uppercaseRegex.test(password)) {
+      Message.innerHTML = "Password must contain atleast one Uppercase letter A-Z";
+      Message.style.color = "red";
+      b = false;
+    }
+    else if (!lowercaseRegex.test(password)) {
+      Message.innerHTML = "Password must contain atleast one Lowercase letter a-z";
+      Message.style.color = "red";
+      b = false;
+    }
+
+    else if (!digitRegex.test(password)) {
+      Message.innerHTML = "Password must contain atleast one digit 0-9";
+      Message.style.color = "red";
+      b = false;
+    }
+    else {
+      Message.innerHTML = "Password is valid";
+      Message.style.color = "green";
+      b = true;
+
+    }
+    updateSignupButtonState()
+
+
+  }
+  function checkPasswordMatch() {
+    let password = document.getElementById("password").value;
+    var confirmPassword = document.getElementById("confirmPassword").value;
+    var matchMessage = document.getElementById("passwordHelp");
+
+    if (password === confirmPassword) {
+      matchMessage.innerHTML = "Passwords match!";
+      matchMessage.style.color = "green";
+      c = true;
+    } else {
+      matchMessage.innerHTML = "Passwords do not match.";
+      matchMessage.style.color = "red";
+      c = false;
+    }
+    updateSignupButtonState()
+  }
+
+
+  function updateSignupButtonState() {
+    signupButton.disabled = !(a && b && c);
+  }
+
+
+
+
+
+</script>
+
+
+
+
+</html>

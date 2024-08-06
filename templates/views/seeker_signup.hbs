@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Provider Sign Up Form</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+
+  <style>
+    .signup-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container my-4 signup-container">
+    <div class="row">
+      <div class="col-md-6 col-lg-6 col-sm-12">
+        <img src="signup_seeker.jpg" alt="Signup Image" class="img-fluid">
+      </div>
+      <div class="col-md-6 col-lg-6 col-sm-12" id="abc">
+        <h2>Seeker Registeration</h2>
+        <form id="signupForm" action="/seeker_signup" method="POST">
+          <div class="form-group">
+            <label for="fullName">Name:</label>
+            <input type="text" class="form-control" id="fullName" name="fullName" required>
+          </div>
+          <div class="form-group">
+            <label for="phoneNumber">Phone Number:</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="countryCode">+91</span>
+              </div>
+
+              <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" pattern="[0-9]{10}"
+                maxlength="10" placeholder="Enter 10-digit phone number" required>
+                </div>
+              <small id="phoneHelp" class="form-text text-muted">Please enter a valid 10-digit phone number.</small>
+            </div>
+            
+            <div class="form-group">
+              <label for="Address">Address:</label>
+              <textarea class="form-control" id="Address" name="Address" rows="3" placeholder="Enter your address here"
+                required></textarea>
+            </div>
+
+
+
+            <div class="form-group">
+              <label for="password">Password:</label>
+              <input type="password" class="form-control" id="password" name="password" required minlength="8">
+            </div>
+            <div class="form-group">
+              <label for="confirmPassword">Confirm Password:</label>
+              <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required
+                minlength="8">
+              <small id="passwordHelp"></small>
+            </div>
+            <div class="form-group">
+              <label for="city">City:</label>
+              <select class="form-control" id="city" name="city" required>
+                <option value="" disabled selected id="defaultCity">Select your city</option>
+                <option value="patiala">Patiala</option>
+                <option value="ludhiana">Ludhiana</option>
+                <option value="chandigarh">Chandigarh</option>
+                <!-- Add more city options as needed -->
+              </select>
+            </div>
+            <div class="form-group form-check">
+              <input type="checkbox" class="form-check-input" id="agreeTerms" required>
+              <label class="form-check-label" for="agreeTerms">I agree to the terms and conditions</label>
+            </div>
+            <button type="submit" class="btn btn-primary" id="signupButton">Sign Up</button>
+            <button type="button" class="btn btn-secondary" onclick="resetForm()">Reset</button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script>
+
+    var signupButton = document.getElementById("signupButton");
+    signupButton.disabled = true;
+
+    function resetForm() {
+      document.getElementById("signupForm").reset();
+      document.getElementById("defaultCity").selected = true;
+    }
+
+    var signupButton = document.getElementById("signupButton");
+
+    function resetForm() {
+      document.getElementById("signupForm").reset();
+      document.getElementById("defaultCity").selected = true;
+    }
+
+    // Password match check
+
+    document.getElementById("confirmPassword").addEventListener("input", checkPasswordMatch);
+
+    function checkPasswordMatch() {
+      var password = document.getElementById("password").value;
+      var confirmPassword = document.getElementById("confirmPassword").value;
+      var matchMessage = document.getElementById("passwordHelp");
+
+      if (password === confirmPassword) {
+        matchMessage.innerHTML = "Passwords match!";
+        matchMessage.style.color = "green";
+        signupButton.disabled = false;
+      } else {
+        matchMessage.innerHTML = "Passwords do not match.";
+        matchMessage.style.color = "red";
+        signupButton.disabled = true;
+      }
+    }
+
+
+
+    // Attach the validateServices function to the change event of checkboxes
+    var serviceCheckboxes = document.querySelectorAll('input[name="options[]"]');
+    serviceCheckboxes.forEach(function (checkbox) {
+      checkbox.addEventListener('change', validateServices);
+    });
+
+
+
+
+
+  </script>
+
+
+
+</body>
+
+</html>

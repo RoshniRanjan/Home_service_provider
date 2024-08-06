@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phone Verification</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      max-width: 420px; /* Set maximum width */
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    h1 {
+      color: #007bff;
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+
+    .description {
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      text-align: left;
+      margin-bottom: 20px;
+    }
+
+    input {
+      width: 100%; /* Adjust width to 100% */
+      padding: 10px;
+      box-sizing: border-box;
+    }
+
+    #verifyBtn {
+      background-color: #007bff;
+      color: #fff;
+      padding: 10px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      width: 100%;
+    }
+
+    #errorMessage {
+      color: red;
+      margin-top: 10px;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 576px) {
+      .container {
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Phone Verification</h1>
+    <p class="description">Please enter the 4-digit verification code sent to your phone. The code is valid for 10 minutes.</p>
+    <form id="otp-verify" action="/otp-verification" method="POST">
+      <div class="form-group">
+        <label for="phoneNumber">Phone Number:</label>
+        <input type="text" id="phoneNumber" name="phoneNumber" value="{{phoneNumber}}" readonly>
+      </div>
+      <div class="form-group">
+        <label for="otpInput">Verification Code:</label>
+        <input type="text" id="otpInput" name="otpInput" class="form-control" pattern="[0-9]{4}" placeholder="Enter 4-digit code" required>
+      </div>
+      <input type="hidden" name="otp" value="{{otp}}">
+      <button type="submit" id="verifyBtn" class="btn btn-primary">Verify Code</button>
+      <div class="mt-4" id="Message">{{Message}}</div>
+    </form>
+  </div>
+
+  <!-- Bootstrap JS and jQuery -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

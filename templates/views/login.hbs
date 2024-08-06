@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+
+    <style>
+        body {
+            background-color: #BBE5FA;
+        }
+
+        .card {
+            border: none;
+            border-radius: 1rem;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+        }
+
+        .card-img-top {
+            border-radius: 1rem 0 0 1rem;
+            width: 100%;
+            height: auto;
+        }
+
+        .form-label {
+            font-weight: bold;
+        }
+
+        .btn-dark {
+            background-color: #343a40;
+            border-color: #343a40;
+        }
+
+        .btn-dark:hover {
+            background-color: #292b2c;
+            border-color: #292b2c;
+        }
+
+        .small {
+            font-size: 0.85rem;
+        }
+
+        h5.fw-normal {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <section class="vh-100 ">
+        <div class="container py-4 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-12 col-md-8 col-lg-10">
+                    <div class="card">
+                        <div class="row g-0">
+                            <div class="col-md-6 col-lg-5 d-none d-md-block ">
+                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+                                    alt="login form" class="img-fluid " />
+                            </div>
+                            <div class="col-md-6 col-lg-7 d-flex align-items-center">
+                                <div class="card-body p-3 p-lg-4 text-black">
+                                    <form id="loginForm" action="/login" method="POST">
+                                        <div class="d-flex align-items-center mb-3 pb-1 justify-content-center">
+                                            <span class="h1 fw-bold mb-0">ProAvail</span>
+                                        </div>
+                                        <h5 class="fw-normal mb-3 pb-3 align-items-center justify-content-center">Log
+                                            into your account</h5>
+                                        <div class="form-group mb-4">
+                                            <label for="phoneNumber" class="form-label">Phone Number:</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="countryCode">+91</span>
+                                                </div>
+
+                                                <input type="text" class="form-control" id="phoneNumber"
+                                                    name="phoneNumber" value="{{ phoneNumber }}" pattern="[0-9]{10}"
+                                                    maxlength="10" placeholder="Enter 10-digit phone number" required>
+                                            </div>
+                                            <small id="phoneHelp" class="form-text text-muted">Please enter a valid
+                                                10-digit phone number.</small>
+                                        </div>
+
+                                        <div class="form-group mb-4">
+                                            <label for="password" class="form-label">Password:</label>
+                                            <input type="password" class="form-control" id="password" name="password"
+                                                required minlength="8">
+                                        </div>
+                                        <div class="form-group form-check">
+                                            <input type="checkbox" class="form-check-input" id="rememberMe"
+                                                name="rememberMe">
+                                            <label class="form-check-label" for="rememberMe">Remember me</label>
+                                        </div>
+                                        <label for="errorMessage" style="color: red;">{{ errorMessage }}</label>
+                                        <div class="pt-1 mb-4">
+                                            <button class="btn btn-dark btn-lg btn-block" type="submit">Login</button>
+                                        </div>
+                                        <a class="small text-muted" href="authentication">Forgot password?</a>
+                                        <p class="mb-4 pb-lg-2" style="color: #393f81;">Don't have an account? <a
+                                                href="signup" style="color: #393f81;">Register here</a></p>
+                                        <a href="#!" class="small text-muted">Terms of use.</a>
+                                        <a href="#!" class="small text-muted">Privacy policy</a>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+</body>
+
+</html>

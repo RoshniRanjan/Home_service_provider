@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProAvail</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="styles.css" rel="stylesheet">
+    <style>
+        /* Modal styles */
+
+
+
+        button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+
+        /* Additional styles for the modal content */
+
+
+        .button-container {
+            margin-top: 20px;
+        }
+
+        .button-container button {
+            margin: 0 10px;
+        }
+
+        #logoutSuccessModal {
+
+
+            /* Hide the modal by default */
+            position: fixed;
+            /* Position the modal */
+            top: 50%;
+            /* Center the modal vertically */
+            left: 50%;
+            /* Center the modal horizontally */
+            transform: translate(-50%, -50%);
+            /* Center the modal */
+            background-color: rgba(0, 0, 0, 0.5);
+            /* Modal background color */
+
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+            /* Add shadow to the modal */
+            z-index: 1000;
+            /* Ensure modal appears on top of other content */
+        }
+
+        #modalcontent {
+            background-color: #fefefe;
+            margin: 10% auto;
+            padding: 10px;
+            border: 2px solid #888;
+            width: 40%;
+            /* Adjust the width as per your requirement */
+            max-width: 600px;
+            /* Set a maximum width if needed */
+            text-align: center;
+        }
+    </style>
+
+
+</head>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="script.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+
+    var modal = document.getElementById("logoutSuccessModal");
+
+    document.addEventListener('DOMContentLoaded', function () {
+        // Execute your function here
+        const logout={{message}}
+        
+        if (logout) {
+            modal.style.display = "block";
+            
+        }
+
+    });
+
+    function toggleAnswer(faqId) {
+        var answer = document.getElementById(faqId);
+        if (answer.style.display === 'block') {
+            answer.style.display = 'none';
+        } else {
+            answer.style.display = 'block';
+        }
+    }
+
+    var okbutton = document.getElementById("okbutton");
+
+    okbutton.onclick = function () {
+        modal.style.display = 'none';
+        window.location.href = "/";
+
+        
+    }
+
+</script>
+
+
+<body>
+
+    {{>navbar}}
+
+    <div class="container-fluid back">
+        <div class="box text-center">
+            <h1 class="display-4">Find Your Service Provider</h1>
+            <p class="lead">Select a service to find the best professionals near you.</p>
+
+            <form>
+                <div class="form-group">
+                    <label for="serviceSelect">Select a Service:</label>
+                    <select class="form-control" id="serviceSelect">
+                        <option value="all">All Services</option>
+                        <option value="plumber">Plumber</option>
+                        <option value="electrician">Electrician</option>
+                        <option value="painter">Painter</option>
+                        <option value="technician">Technician</option>
+                        <option value="movers-packers">Movers and Packers</option>
+                        <option value="gardening services"> Gardener</option>
+                        <option value="carpenter">Carpenter</option>
+                        <option value="appliance repair">Appliance Repair</option>
+                        <option value="beauty services"> Beauty Services</option>
+                        <option value="laundry">Laundry Services</option>
+                        <option value="glass repair">Glass Repair</option>
+
+
+                    </select>
+                    <button type="button" class="btn btn-success" onclick="filterAndRedirect()">Search</button>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+
+    <div class="text-center my-4">
+        <h2 style="color:blue"><b>ALL TRENDING HOME SERVICES</b></h2>
+    </div>
+
+
+    <div class="container my-4 " style="border:3px dashed #0b460b ; padding: 10px;">
+
+        <div class="row d-flex">
+            <div class="col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center text-center">
+                <figure>
+                    <a href="#" onclick="selectService('plumber')">
+                        <img src="plumber.png" width="70px" height="70px" class="img-thumbnail grayscale">
+                        <figcaption style="color:black">PLUMBER</figcaption>
+                    </a>
+                </figure>
+
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center text-center">
+                <figure>
+                    <a href="#" onclick="selectService('carpenter')">
+                        <img src="carpenter.png" width="70px" height="70px" class="img-thumbnail grayscale">
+                        <figcaption style="color:black">CARPENTER</figcaption>
+                    </a>
+                </figure>
+
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center text-center">
+                <figure>
+                    <a href="#" onclick="selectService('electrician')">
+                        <img src="electrician (1).png" width="70px" height="70px" class="img-thumbnail grayscale">
+                        <figcaption style="color:black">ELECTRICIAN</figcaption>
+                    </a>
+                </figure>
+
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center text-center">
+                <figure>
+                    <a href="#" onclick="selectService('pest control')">
+                        <img src="pest-control.png" width="70px" height="70px" class="img-thumbnail grayscale">
+                        <figcaption style="color:black">PEST-CONTROL</figcaption>
+                    </a>
+                </figure>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center text-center">
+                <figure>
+                    <a href="#" onclick="selectService('technician')">
+                        <img src="technician.png" width="70px" height="70px" class="img-thumbnail grayscale">
+                        <figcaption style="color:black">TECHNICIAN</figcaption>
+                    </a>
+                </figure>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center text-center">
+                <figure>
+                    <a href="#" onclick="selectService('movers-packers')">
+                        <img src="movers-packers.png" width="70px" height="70px" class="img-thumbnail grayscale">
+                        <figcaption style="color:black">MOVERS AND PACKERS</figcaption>
+                    </a>
+                </figure>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center text-center">
+                <figure>
+                    <a href="#" onclick="selectService('appliance repair')">
+                        <img src="appliance-repair.png" width="70px" height="70px" class="img-thumbnail grayscale">
+                        <figcaption style="color:black">APPLIANCE REPAIR</figcaption>
+                    </a>
+                </figure>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center text-center">
+                <figure>
+                    <a href="#" onclick="selectService('painter')">
+                        <img src="painter.png" width="70px" height="70px" class="img-thumbnail grayscale">
+                        <figcaption style="color:black">PAINTER</figcaption>
+                    </a>
+                </figure>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center text-center">
+                <figure>
+                    <a href="#" onclick="selectService('laundry')">
+                        <img src="laundry.png" width="70px" height="70px" class="img-thumbnail grayscale">
+                        <figcaption style="color:black">LAUNDRY SERVICES</figcaption>
+                    </a>
+                </figure>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center text-center">
+                <figure>
+                    <a href="#" onclick="selectService('beauty services')">
+                        <img src="beauty.png" width="70px" height="70px" class="img-thumbnail grayscale">
+                        <figcaption style="color:black">BEAUTY SERVICES</figcaption>
+                    </a>
+                </figure>
+            </div>
+
+            <div class="col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center text-center">
+                <figure>
+                    <a href="#" onclick="selectService('gardening services')">
+                        <img src="gardening.png" width="70px" height="70px" class="img-thumbnail grayscale">
+                        <figcaption style="color:black">GARDENING</figcaption>
+                    </a>
+                </figure>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center text-center">
+                <figure>
+                    <a href="#" onclick="selectService('glass repair')">
+                        <img src="glass-repair.png" width="70px" height="70px" class="img-thumbnail grayscale">
+                        <figcaption style="color:black">GLASS REPAIR</figcaption>
+                    </a>
+                </figure>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-5 mb-4 text-center">
+        <h2>How it works? </h2>
+    </div>
+
+
+    <div class="container my-4">
+
+        <div class="row d-flex justify-content-center text-center">
+            <div class="col-lg-3 col-sm-12 d-flex justify-content-center text-center block "
+                onmouseover="bulgeBlock(this)" onmouseout="resetBlock(this)"
+                style="padding:15px; background-color: white;">
+                <figure>
+                    <h3>STEP-1</h3>
+                    <hr>
+                    <img src="explore.png" width="100px" height="100px" class="img-thumbnail grayscale my-3">
+
+                    <h3>Explore The Services</h3>
+                </figure>
+            </div>
+
+            <div class="col-lg-3 col-sm-12 d-flex justify-content-center text-center block"
+                style="padding:15px; background-color: white;" onmouseover="bulgeBlock(this)"
+                onmouseout="resetBlock(this)">
+                <figure>
+                    <h3>STEP-2</h3>
+                    <hr>
+                    <img src="connect.png" width="100px" height="100px" class="img-thumbnail grayscale my-3">
+                    <h3>Connect with Service Provider</h3>
+                </figure>
+            </div>
+            <div class="col-lg-3 col-sm-12 d-flex justify-content-center text-center block"
+                style="padding:15px; background-color: white;" onmouseover="bulgeBlock(this)"
+                onmouseout="resetBlock(this)">
+                <figure>
+                    <h3>STEP-3</h3>
+                    <hr>
+                    <img src="relax.png" width="100px" height="100px" class="img-thumbnail grayscale my-3">
+                    <h3>Relax and Keep Calm</h3>
+                </figure>
+            </div>
+
+
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+    <div class="container my-5">
+        <h2 class="text-center my-4">Frequently Asked Questions</h2>
+
+        <div class="faq-item">
+            <div class="question" onclick="toggleAnswer('faq1')">
+                <h5>How can I add my services to the directory?</h5>
+            </div>
+            <div class="answer" id="faq1">
+                <p>To add your services to our directory, you can create an account and use the service provider
+                    dashboard. There, you will find an option to add and manage your services.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question" onclick="toggleAnswer('faq2')">
+                <h5>Is it free to list my services on your website?</h5>
+            </div>
+            <div class="answer" id="faq2">
+                <p>Yes, it is currently free to list your services on our website. We offer a basic listing option at no
+                    cost. However, we may introduce premium features in the future.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question" onclick="toggleAnswer('faq3')">
+                <h5>How do users contact service providers?</h5>
+            </div>
+            <div class="answer" id="faq3">
+                <p>Users can contact service providers through the contact information provided in their listings. Make
+                    sure your contact details are up-to-date to receive inquiries from potential customers.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question" onclick="toggleAnswer('faq4')">
+                <h5>Can I edit or remove my service listing?</h5>
+            </div>
+            <div class="answer" id="faq4">
+                <p>Yes, you can edit or remove your service listing at any time by logging into your service provider
+                    account and accessing the dashboard. This allows you to keep your information current.</p>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div id="logoutSuccessModal" class="modal">
+        <div class="modal-content" id="modalcontent">
+            <p class="my-2">You have been successfully logged out.</p>
+            <div class="button-container">
+                <button id="okbutton" class="btn btn-primary">OK</button>
+            </div>
+
+        </div>
+    </div>
+
+
+
+    {{>footer}}
+
+
+
+
+
+</body>
+
+</html>

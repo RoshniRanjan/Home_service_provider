@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #eee;
+        
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: auto;
+        }
+
+        .profile-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-name {
+            text-align: center;
+            text-transform: uppercase;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .profile-details {
+            text-align: center;
+            text-transform: uppercase;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .profile-info {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <section>
+        {{>navbar}}
+        <div class="container my-4">
+            {{#if passwordChanged}}
+            <div class="alert alert-success" role="alert">
+                Your password has been successfully updated!
+            </div>
+        {{/if}}
+         {{#if profileChanged}}
+            <div class="alert alert-success" role="alert">
+                Your profile has been successfully updated!!
+            </div>
+        {{/if}}
+           
+            <!-- Profile Picture and Name Section -->
+            <div class="text-center">
+                <div class="profile-img">
+                    <img src="{{user.profileImage}}" alt="" class="img-fluid"
+                        onerror="this.onerror=null; this.src='profile1.jpg';">
+                </div>
+                <div class="profile-name">
+                    <h3>{{user.fullName}}</h3>
+                </div>
+            </div>
+
+            <div class="col-lg-8 mx-auto">
+
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Full Name</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">{{user.fullName}}</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Phone Number</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">+91 {{user.phoneNumber}}</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Address</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">{{user.Address}}</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">City</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">{{user.city}}</p>
+                            </div>
+                        </div>
+                        {{#if user.preferredTiming}}
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Hours of working</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">{{user.preferredTiming}}</p>
+                            </div>
+                        </div>
+                        {{/if}}
+                        {{#if user.services}}
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Services Provided</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">{{#each user.services}}
+                            {{this}}{{#unless @last}}, {{/unless}}
+                            {{/each}}</p>
+                            </div>
+                        </div>
+
+                        {{/if}}
+
+                    </div>
+                </div>
+
+                <!-- Buttons for Editing Profile and Changing Password -->
+                <div class="text-center">
+                    <a href="/edit-profile" class="btn btn-primary mx-2">Edit Profile</a>
+                    <a href="/change" class="btn btn-secondary mx-2">Change Password</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

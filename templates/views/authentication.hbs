@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phone Verification</title>
+  <!-- Include Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <style>
+    body {
+      font-family: 'Arial';
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      width: 350px;
+      height: 450px;
+    }
+
+    h2 {
+      color: #007bff;
+font-weight: bold;
+      margin-bottom: 10px;
+      /* Add space between title and form */
+    }
+
+    form {
+      max-width: 350px;
+      margin: auto;
+      margin-top: 15px;
+
+    }
+
+    .form-group {
+      text-align: left;
+
+      margin-bottom: 15px;
+      /* Add space between form elements */
+    }
+
+    #phoneInput {
+      padding-left: 10px;
+    }
+
+    #sendVerificationBtn {
+      margin-top: 20px;
+    }
+    .form-label{
+      font-weight: bold;
+    }
+
+    #errorMessage {
+      color: red;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h2>Phone Details</h2>
+
+
+    <h6>Enter your phone number to verify your account:</h6>
+    <br>
+
+    <form id="verificationForm" action="/authentication" method="POST">
+
+      <div class="form-group mb-4">
+        <label for="phoneNumber" class="form-label">Phone Number:</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="countryCode">+91</span>
+          </div>
+
+          <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" 
+            pattern="[0-9]{10}" maxlength="10" placeholder="Enter 10-digit phone number" required>
+        </div>
+         </div>
+
+      <label for="errorMessage" style="color: red;"><h6>{{ errorMessage }}</h6></label>
+      <div class="pt-1 mb-4">
+        <button class="btn btn-primary btn-lg btn-block" type="submit">Send verification code</button>
+      </div>
+      <p class="mb-4 pb-lg-2" style="color: #393f81;">Don't have an account? <a href="signup"
+          style="color: #393f81;">Register here</a></p>
+
+    </form>
+  </div>
+
+  <!-- Include Bootstrap JS and jQuery -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

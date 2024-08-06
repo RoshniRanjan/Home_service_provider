@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Details Form</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+
+
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .signup-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        .edit-icon {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            font-size: 10px;
+            color: #ffffff;
+            background-color: #007bff;
+            padding: 6px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+
+        .profile-box {
+            max-width: 800px;
+            /* Adjust as needed */
+            width: 100%;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+            /* Center text and elements inside */
+        }
+
+        .profile-img-container {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: auto;
+            /* Center the container */
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .change-profile-button {
+            position: absolute;
+            bottom: 10px;
+            /* Adjust vertical position */
+            left: 50%;
+            /* Center horizontally */
+            transform: translateX(-50%);
+            /* Center the button relative to its parent */
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+
+        .form-title {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .btn-update {
+            width: 100%;
+            padding: 10px;
+            font-weight: bold;
+        }
+
+        .invalid-feedback {
+            display: none;
+            color: #dc3545;
+            margin-top: 5px;
+        }
+
+        .file-input-label {
+            display: none;
+            position: relative;
+            pointer-events: none;
+        }
+
+        /* Hide the file input */
+        .file-input {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            opacity: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container my-4 signup-container">
+
+        <div class="profile-box my-4">
+            <h2 class="form-title">Edit Profile Form</h2>
+
+            <div class="profile-img-container">
+                <img src="{{user.profileImage}}" alt="Profile Image" class="profile-img"
+                    onerror="this.onerror=null; this.src='profile1.jpg';">
+                <i class="fas fa-pencil-alt edit-icon" onclick="changeProfileImage()"></i>
+
+            </div>
+
+            <form id="editForm" class="needs-validation my-4" action="/edit-profile" method="POST">
+                <input type="text" class="file-input" id="profileImage" name="profileImage">
+                <div class="form-group">
+                    <label for="fullName">Full Name:</label>
+                    <input type="text" class="form-control" id="fullName" name="fullName" value="{{user.fullName}}"
+                        required>
+                </div>
+                <div class="form-group">
+                    <label for="phoneNumber">Phone Number:</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="countryCode">+91</span>
+                        </div>
+                        <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" pattern="[0-9]{10}"
+                            maxlength="10" value="{{user.phoneNumber}}" required>
+                    </div>
+                    <small id="phoneHelp" class="form-text text-muted">Please enter a valid 10-digit phone
+                        number.</small>
+                </div>
+                <div class="form-group">
+                    <label for="Address">Address:</label>
+                    <textarea class="form-control" id="Address" name="Address" rows="3"
+                        required>{{user.Address}}</textarea>
+                </div>
+                {{#if user.services}}
+                <div class="form-group" id="services" name:"services">
+                    <label>Services Provided:</label>
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="option1" name="options"
+                                    value="Plumber">
+                                <label class="form-check-label" for="option1">Plumber</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="option2" name="options"
+                                    value="Carpenter">
+                                <label class="form-check-label" for="option2">Carpenter</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="option3" name="options"
+                                    value="Technician">
+                                <label class="form-check-label" for="option3">Technician</label>
+                            </div>
+
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="option4" name="options"
+                                    value="Gardening Services">
+                                <label class="form-check-label" for="option4">Gardener</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="option5" name="options"
+                                    value="Painter">
+                                <label class="form-check-label" for="option5">Painter</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="option6" name="options"
+                                    value="Pest Control">
+                                <label class="form-check-label" for="option6">Pest-control</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="option7" name="options"
+                                    value="Movers-Packers">
+                                <label class="form-check-label" for="option7">Movers-Packers</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="option8" name="options"
+                                    value="Glass Repair">
+                                <label class="form-check-label" for="option8">Glass Repair</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="option9" name="options"
+                                    value="Beauty services">
+                                <label class="form-check-label" for="option9">Beauty Services</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="option10" name="options"
+                                    value="Electrician">
+                                <label class="form-check-label" for="option10">Electrician</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="option11" name="options"
+                                    value="Appliance repair">
+                                <label class="form-check-label" for="option11">Appliance-Repair</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="option12" name="options"
+                                    value="Laundry">
+                                <label class="form-check-label" for="option12">Laundry</label>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="invalid-feedback d-block"></div>
+                </div>
+                {{/if}}
+
+                <div class="form-group">
+                    <label for="city">City:</label>
+                    <select class="form-control" id="city" name="city" required>
+                        <option value="" disabled>Select your city</option>
+                        <option value="Patiala">Patiala</option>
+                        <option value="Ludhiana">Ludhiana</option>
+                        <option value="Chandigarh">Chandigarh</option>
+                        <!-- Add more city options as needed -->
+                    </select>
+                </div>
+                {{#if user.preferredTiming}}
+                <div class="form-group">
+                    <label for="preferredTimings">Preferred Timings:</label>
+                    <input type="text" class="form-control" id="preferredTiming" name="preferredTiming"
+                        value="{{user.preferredTiming}}" required>
+                </div>
+                {{/if}}
+                <button type="submit" id="update" class="btn btn-primary" id="update"
+                    onclick="validateServices()">Update Profile</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    var updatebtn = document.getElementById("update");
+    var a = true;
+    updatebtn.disabled = false;
+    const profileImage = document.getElementById("profileImage");
+    profileImage.value = "{{user.profileImage}}"
+
+
+
+
+function changeProfileImage() {
+    const profileImageInput = document.createElement('input');
+    profileImageInput.type = 'file';
+    profileImageInput.accept = 'image/*';
+    profileImageInput.onchange = function (event) {
+        const file = event.target.files[0];
+
+        // Extract the filename from the file object
+        const fileName = file.name;
+
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            const profileImgElement = document.querySelector('.profile-img');
+            profileImgElement.src = e.target.result;
+
+            const profileImage = document.getElementById('profileImage');
+            if (profileImage) {
+                // Set the profileImage value to the filename
+                profileImage.value = fileName;
+            }
+        };
+        reader.readAsDataURL(file);
+    };
+
+    // Trigger the file input click to open the file selection dialog
+    profileImageInput.click();
+}
+
+    
+    document.addEventListener('DOMContentLoaded', function () {
+    const selectedServicesString = "{{{ selectedServicesString }}}"; 
+    console.log(selectedServicesString)
+    // Use triple braces for unescaped output
+
+    const selectedServices = selectedServicesString.split(',').map(service => service.trim());
+    console.log(selectedServices);
+
+    const checkboxes = document.querySelectorAll('input[name="options"]');
+    checkboxes.forEach(checkbox => {
+        checkbox.checked = selectedServices.includes(checkbox.value);
+    });
+});
+
+    var userCity = "{{ user.city }}"; // Make sure user.city is properly populated
+
+    // Get the <select> element by its ID
+    var citySelect = document.getElementById('city');
+
+    // Loop through each <option> element inside the <select>
+    for (var i = 0; i < citySelect.options.length; i++) {
+        var option = citySelect.options[i];
+
+        // Check if the option value matches the user's city
+        if (option.value === userCity) {
+            option.selected = true; // Set the 'selected' attribute
+            break; // Exit the loop once the matching option is found
+        }
+    }
+    var form = document.getElementById("signupForm");
+
+    function validateServices() {
+        // Check if at least one checkbox is selected
+        checkboxes = document.querySelectorAll('input[name="options"]:checked');
+        var servicesFeedback = document.querySelector('.form-group#services .invalid-feedback');
+
+        if (checkboxes.length === 0) {
+            // Show invalid feedback for services
+            servicesFeedback.innerHTML = 'Please select at least one service.';
+            a = false;
+
+
+        } else {
+            // Hide invalid feedback for services
+            servicesFeedback.innerHTML = '';
+            a = true;
+
+
+        }
+        updateButtonState()
+    }
+
+    // Attach the validateServices function to the change event of checkboxes
+    var serviceCheckboxes = document.querySelectorAll('input[name="options"]');
+    serviceCheckboxes.forEach(function (checkbox) {
+        checkbox.addEventListener('change', validateServices);
+    });
+
+
+
+
+
+    function getCheckedCheckboxes(checkboxGroupName) {
+        const checkboxes = document.getElementsByName(checkboxGroupName);
+        const checkedValues = [];
+
+        checkboxes.forEach((checkbox) => {
+            if (checkbox.checked) {
+                checkedValues.push(checkbox.value);
+            }
+        });
+
+        return checkedValues;
+    }
+
+    function updateButtonState() {
+        updatebtn.disabled = !(a);
+    }
+
+
+
+
+</script>
+
+
+
+
+</html>

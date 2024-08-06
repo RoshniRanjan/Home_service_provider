@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Change Password</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      max-width: 400px; /* Adjusted max-width for responsiveness */
+      width: 100%;
+    }
+
+    h2 {
+      color: #007bff;
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+
+    .form-group {
+      text-align: left;
+      margin-bottom: 20px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      box-sizing: border-box;
+      margin-top: 5px;
+    }
+
+    #resetBtn {
+      background-color: #007bff;
+      color: #fff;
+      padding: 10px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      width: 100%;
+    }
+
+    #errorMessage {
+      color: red;
+      margin-top: 10px;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Change Password</h2>
+
+    <form id="changePasswordForm" action="/change" method="POST">
+      <!-- Old Password (Initially Hidden) -->
+      <div id="oldPasswordSection" class="form-group hidden">
+        <label for="oldPassword">Old Password:</label>
+        <input type="password" id="oldPassword" name="oldPassword" class="form-control">
+      </div>
+
+      <!-- New Password (Initially Hidden) -->
+      <div id="newPasswordSection" class="form-group hidden">
+        <label for="newPassword">New Password:</label>
+        <input type="password" id="newPassword" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.*\s).{8,}" 
+          title="Password must have at least 8 characters, 1 digit, 1 uppercase letter, 1 lowercase letter, and 1 special character" required
+          class="form-control">
+      </div>
+
+      <!-- Confirm New Password (Initially Hidden) -->
+      <div id="confirmPasswordSection" class="form-group hidden">
+        <label for="confirmPassword">Confirm New Password:</label>
+        <input type="password" id="confirmPassword" name="confirmPassword" required class="form-control">
+      </div>
+
+      <!-- Error Message -->
+      <div id="errorMessage"></div>
+
+      <!-- Button to Reveal Password Fields -->
+      <button type="button" id="revealPasswordBtn" class="btn btn-primary">Enter Old Password</button>
+
+      <!-- Reset Button (Initially Hidden) -->
+      <button type="submit" id="resetBtn" class="btn btn-primary hidden">Reset Password</button>
+    </form>
+  </div>
+
+  <!-- jQuery for adding custom validation and interaction -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script>
+     $(document).ready(function () {
+    
+       
+      $('#revealPasswordBtn').click(function () {
+        $('#oldPasswordSection').removeClass('hidden'); // Show old password section
+        $('#revealPasswordBtn').addClass('hidden'); // Hide reveal button
+      });
+
+      $('#oldPassword').change(function () {
+        // Simulate checking old password (replace this with actual validation logic)
+        const oldPassword = $('#oldPassword').val();
+        const isOldPasswordCorrect = (oldPassword === "{{user.password}}"); // Replace 'currentPassword' with actual old password
+
+        if (isOldPasswordCorrect) {
+          $('#newPasswordSection').removeClass('hidden'); // Show new password section
+          $('#confirmPasswordSection').removeClass('hidden'); // Show confirm password section
+          $('#resetBtn').removeClass('hidden'); // Show reset button
+        } else {
+          $('#errorMessage').html('<p style="color: red;">Invalid old password. Please try again.</p>');
+        }
+      });
+
+      $('#confirmPassword').change(function () {
+        
+        const newPassword = $('#newPassword').val();
+        const confirmPassword = $('#confirmPassword').val();
+
+        if (newPassword !== confirmPassword) {
+          $('#errorMessage').html('<p style="color: red;">Passwords do not match. Please try again.</p>');
+          $('#resetBtn').prop('disabled', true); 
+        // Hide reset button if passwords don't match
+        } else {
+          $('#errorMessage').html(''); // Clear error message if passwords match
+          $('#resetBtn').prop('disabled', false);// Show reset button if passwords match
+        }
+      });
+    });
+  </script>
+
+  <!-- Bootstrap JS -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
